@@ -9,6 +9,9 @@ public class AirRoomHandler : MonoBehaviour
 	
 	public int sumTotal = 0;
 
+    public Material NewMaterial;    // Hint for correct value needed / if valve is on
+    public Material NewMaterial2;   // If valve is off
+
 	// Using the Fisher-Yates Shuffle to randomise the ordering of the valve values
 	private static void ShuffleArray<T>(T[] array)
 	{
@@ -22,6 +25,80 @@ public class AirRoomHandler : MonoBehaviour
 		}
 	}
 
+    private void colourHints(int[] array)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            switch (array[i])
+            {
+                case 0:
+                    GameObject.Find("Checker0").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 1:
+                    GameObject.Find("Checker1").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 2:
+                    GameObject.Find("Checker2").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 3:
+                    GameObject.Find("Checker3").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 4:
+                    GameObject.Find("Checker4").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 5:
+                    GameObject.Find("Checker5").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 6:
+                    GameObject.Find("Checker6").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 7:
+                    GameObject.Find("Checker7").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 8:
+                    GameObject.Find("Checker8").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 9:
+                    GameObject.Find("Checker9").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 10:
+                    GameObject.Find("Checker10").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 11:
+                    GameObject.Find("Checker11").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 12:
+                    GameObject.Find("Checker12").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 13:
+                    GameObject.Find("Checker13").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                case 14:
+                    GameObject.Find("Checker14").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+                default:
+                    GameObject.Find("Checker15").GetComponent<MeshRenderer>().material = NewMaterial;
+                    break;
+
+            }
+            Debug.Log(array[i]);
+        }
+    }
 
 
 	// Start is called before the first frame update
@@ -30,6 +107,7 @@ public class AirRoomHandler : MonoBehaviour
 		// Randomises the values assigned to each valve and lock
 		ShuffleArray(binaryArray);
 		ShuffleArray(lockArray);
+        colourHints(lockArray);
 
 		/*
 		/Debug.Log(binaryArray[0]);
@@ -92,8 +170,45 @@ public class AirRoomHandler : MonoBehaviour
 
 		sumTotal = redOn * binaryArray[0] + yellowOn * binaryArray[1] + greenOn * binaryArray[2] + blueOn * binaryArray[3];
 
-		// Ensures no out-of-bounds errors by clamping it to the minimum/maximum values
-		if (sumTotal < 0)
+        // Change the colours of the lighths to signal if the valves are on or not
+        if (redOn == 1)
+        {
+            GameObject.Find("Light1").GetComponent<MeshRenderer>().material = NewMaterial;
+        }
+        else
+        {
+            GameObject.Find("Light1").GetComponent<MeshRenderer>().material = NewMaterial2;
+        }
+
+        if (yellowOn == 1)
+        {
+            GameObject.Find("Light2").GetComponent<MeshRenderer>().material = NewMaterial;
+        }
+        else
+        {
+            GameObject.Find("Light2").GetComponent<MeshRenderer>().material = NewMaterial2;
+        }
+
+        if (greenOn == 1)
+        {
+            GameObject.Find("Light3").GetComponent<MeshRenderer>().material = NewMaterial;
+        }
+        else
+        {
+            GameObject.Find("Light3").GetComponent<MeshRenderer>().material = NewMaterial2;
+        }
+
+        if (blueOn == 1)
+        {
+            GameObject.Find("Light4").GetComponent<MeshRenderer>().material = NewMaterial;
+        }
+        else
+        {
+            GameObject.Find("Light4").GetComponent<MeshRenderer>().material = NewMaterial2;
+        }
+
+        // Ensures no out-of-bounds errors by clamping it to the minimum/maximum values
+        if (sumTotal < 0)
 		{
 			sumTotal = 0;
 		}

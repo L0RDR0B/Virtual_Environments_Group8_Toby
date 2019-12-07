@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-
 	public float speed = 50;
 	public int valveValue = 0;
 	public bool isOn = false;
@@ -12,7 +11,7 @@ public class Rotate : MonoBehaviour
 
 	public float lastAngle = 0.0f;
 
-	int maxRotations = 3;
+	int maxRotations = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -40,12 +39,13 @@ public class Rotate : MonoBehaviour
 		{
 			lastAngle = currentAngle;
 
-			Cursor.lockState = CursorLockMode.Locked;
+			//Cursor.lockState = CursorLockMode.Locked;
 
 			transform.Rotate(0, -rotX, 0, Space.Self);
 
 			rotateCount = (int) ((lastAngle + 10.0f) / 360);
 
+            // Switches valves on/off once sufficient rotations have bee
 			if(rotateCount >= maxRotations)
 			{
 				isOn = true;
